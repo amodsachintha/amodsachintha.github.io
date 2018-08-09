@@ -48,11 +48,9 @@ images:
     var count=0;
     var images=[
       'IMG_20180120_023133.jpg',
-      'IMG_20180126_223435.jpg',
       'IMG_20180130_171554-01.jpg',
       'IMG_20180201_121100-01.jpg',
       'IMG_20180205_131634_1-01.jpg',
-      'IMG_20180205_181702-01.jpg',
       'IMG_20180207_200548-01.jpg',
       'IMG_20180208_171745-01.jpg',
       'IMG_20180209_170658-01.jpg',
@@ -68,12 +66,12 @@ images:
     ];
    
     for(var i=0; i<images.length;){
-      if(i%6==0 && i!=0){
+      if(i%4==0 && i!=0){
         document.write('<tr>')
       }
-      document.write('<td><img src="/images/the-internship/'+images[i]+'" width="200px"></td>');
+      document.write('<td><a href="/images/the-internship/'+images[i]+'"><img src="/images/the-internship/thumbs/'+images[i]+'" width="200px"></a></td>');
       i++;
-      if(i%6==0 && i!=0){
+      if(i%4==0 && i!=0){
         document.write('</tr>')
       }
     }
