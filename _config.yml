@@ -8,7 +8,7 @@ author:
   name:         Amod Sachintha
   url:          amodsachintha.github.io
   email:        amod077@gmail.com
-  
+
 #social
 facebook_username: amodsachintha
 github_username: amodsachintha
@@ -30,3 +30,11 @@ plugins:
 # Permalinks
 permalink:      /:year-:month-:day/:title
 paginate:       5
+
+jekyll_admin:
+#  hidden_links:
+#    - posts
+#    - pages
+#    - staticfiles
+#    - datafiles
+#    - configuration
