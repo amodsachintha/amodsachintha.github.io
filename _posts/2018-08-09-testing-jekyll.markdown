@@ -17,7 +17,7 @@ I downloaded an `xml` file that contained entries of my posts and associated ass
 
 <img src="/images/testing-jekyll/export.png" alt="export.php" width="600px" class="center"/>
 
-Then used the following script to automate the task of exporting from the wordpress site.
+Then used the following  [script](/files/testing-jekyll/import.rb) to automate the task of exporting from the wordpress site.
 ```ruby
 require "jekyll-import";
     JekyllImport::Importers::WordpressDotCom.run({
@@ -27,11 +27,11 @@ require "jekyll-import";
     })
 ```
 
-Simply calling the script from the command window is sufficent for the script to execute.
+Simply calling the [script](/files/testing-jekyll/import.rb) from the command window is sufficent for the script to execute.
 ```bash
 $ ruby import.rb
 ```
 
-After the script completes, I had to do some housekeeping stuff to clear the markup artifacts that were showin in the posts. I also changed from the default Minima theme to the [Tale theme](http://github.com/chesterhow/tale) since it looked quite simplistic.
+After the script completes, I had to do some housekeeping stuff to clear the markup artifacts that were showing in the posts. I also changed from the default Minima theme to the [Tale theme](http://github.com/chesterhow/tale) since it looked quite simplistic.
 
 The fact that a simple commit on the repo would update the whole site is very handy. Writing a blog post and simply committing would update the blog post as well. This, all in all, is quite a nice way to manage 'pseudo-static' site.
