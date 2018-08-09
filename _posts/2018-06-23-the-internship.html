@@ -46,13 +46,32 @@ images:
   <table>
   <script>
     var count=0;
-    var images=['a.jpeg','b.jpeg','a.jpeg','b.jpeg','b.jpeg','a.jpeg','b.jpeg','b.jpeg','a.jpeg','b.jpeg','b.jpeg','a.jpeg'];
-
+    var images=[
+      'IMG_20180120_023133.jpg',
+      'IMG_20180126_223435.jpg',
+      'IMG_20180130_171554-01.jpg',
+      'IMG_20180201_121100-01.jpg',
+      'IMG_20180205_131634_1-01.jpg',
+      'IMG_20180205_181702-01.jpg',
+      'IMG_20180207_200548-01.jpg',
+      'IMG_20180208_171745-01.jpg',
+      'IMG_20180209_170658-01.jpg',
+      'IMG_20180213_171342-01.jpg',
+      'IMG_20180214_172005-01.jpg',
+      'IMG_20180216_204350.jpg',
+      'IMG_20180223_093828.jpg',
+      'IMG_20180302_102635.jpg',
+      'IMG_20180307_162925-01.jpg',
+      'IMG_20180313_062830.jpg',
+      'IMG_20180315_202753.jpg',
+      'IMG_20180324_011813-01.jpg'
+    ];
+   
     for(var i=0; i<images.length;){
       if(i%6==0 && i!=0){
         document.write('<tr>')
       }
-      document.write('<td><img src="/images/'+images[i]+'" width="200px"></td>');
+      document.write('<td><img src="/images/the-internship/'+images[i]+'" width="200px"></td>');
       i++;
       if(i%6==0 && i!=0){
         document.write('</tr>')
