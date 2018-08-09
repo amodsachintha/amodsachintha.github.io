@@ -22,11 +22,18 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  amodsachintha
 facebook_username: amodsachintha
 
+remote_theme: chesterhow/tale
+
+permalink:    /:year-:month-:day/:title
+paginate:     5
+
+plugins:
+  - jekyll-paginate
+  - jekyll-remote-theme
+  - jekyll-feed
 # Build settings
 markdown: kramdown
-theme: minima
-plugins:
-  - jekyll-feed
+#theme: minima
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
