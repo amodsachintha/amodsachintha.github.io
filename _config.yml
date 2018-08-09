@@ -22,25 +22,13 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  amodsachintha
 facebook_username: amodsachintha
 
-<<<<<<< Updated upstream
-=======
 # Build settings
 
->>>>>>> Stashed changes
 remote_theme: chesterhow/tale
 
 permalink:    /:year-:month-:day/:title
 paginate:     5
-
-<<<<<<< Updated upstream
-=======
-plugins:
-  - jekyll-paginate
-  - jekyll-remote-theme
-
-markdown: kramdown
 #theme: minima
->>>>>>> Stashed changes
 plugins:
   - jekyll-paginate
   - jekyll-remote-theme
