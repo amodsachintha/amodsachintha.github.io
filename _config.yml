@@ -8,6 +8,10 @@ author:
   name:         Amod Sachintha
   url:          amodsachintha.github.io
   email:        amod077@gmail.com
+  
+#social
+facebook_username: amodsachintha
+github_username: amodsachintha
 
 # Build settings
 markdown:       kramdown

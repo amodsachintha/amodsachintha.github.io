@@ -3,3 +3,5 @@ _site
 .jekyll-metadata
 .vscode
 wordpress.xml
+tale.gemspec
+_attachments
