@@ -17,6 +17,10 @@ I downloaded an `xml` file that contained entries of my posts and associated ass
 
 <img src="/images/testing-jekyll/export.png" alt="export.php" width="600px" class="center"/>
 
+The import plugin has to be installed before running the following script.
+```
+$ gem install jekyll-import
+```
 Then used the following  [script](/files/testing-jekyll/import.rb) to automate the task of exporting from the wordpress site.
 ```ruby
 require "jekyll-import";
