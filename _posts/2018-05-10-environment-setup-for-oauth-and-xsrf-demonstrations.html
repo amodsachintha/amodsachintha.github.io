@@ -1,0 +1,62 @@
+---
+layout: post
+title: Environment Setup for OAuth and XSRF Demonstrations
+date: 2018-05-10 13:58:04.000000000 +05:30
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- CSRF
+- SSO
+- SSS
+- Web Development
+tags:
+- Apache
+- Laravel
+meta:
+  _thumbnail_id: '455'
+  _rest_api_published: '1'
+  _rest_api_client_id: "-1"
+  _publicize_job_id: '17689293472'
+  timeline_notification: '1525940884'
+author:
+  login: amodsachintha
+  email: amod077@gmail.com
+  display_name: amodsachintha
+  first_name: ''
+  last_name: ''
+---
+<h2>Introduction</h2>
+<p>The implementations described in the previous posts listed below were implemented in the Laravel PHP Framework environment within the Apache web server.</p>
+<p><a href="https://amodsachintha.wordpress.com/2018/05/10/xsrf-csrf-protection-double-submit-cookie/" target="_blank" rel="noopener">XSRF (CSRF) Protection – Double Submit Cookie</a></p>
+<p><a href="https://amodsachintha.wordpress.com/2018/05/10/xsrf-csrf-protection-synchronizer-token-pattern/" target="_blank" rel="noopener">XSRF (CSRF) Protection – Synchronizer Token Pattern</a></p>
+<p><a href="https://amodsachintha.wordpress.com/2018/05/10/demonstrating-oauth-2-0-using-facebooks-graph-api/" target="_blank" rel="noopener">Demonstrating OAuth 2.0 using Facebook’s Graph API</a></p>
+<h2>Method</h2>
+<p><!--more--></p>
+<p>The basic environment setup is as follows.</p>
+<p><strong>Installing and configuring Apache and enabling SSL is a prerequisite.</strong></p>
+<p><strong>Get Composer</strong>, a dependency management software for developers (including, but not limited to php) from <a href="https://getcomposer.org/download/" target="_blank" rel="noopener">here</a>.</p>
+<p><strong>Create a new Laravel Application using the following command</strong>. Make sure to browse into the Document Root of the web server before executing the following command.</p>
+<pre class=" language-php"><code class=" language-php">composer create<span class="token operator">-</span>project <span class="token operator">--</span>prefer<span class="token operator">-</span>dist laravel<span class="token operator">/</span>laravel oauth</code></pre>
+<p>This will download the Laravel Framework and configure it to run.</p>
+<p><strong>Edit the hosts file in Windows to add local DNS resolution for easy usage.</strong></p>
+<pre>C:\Windows\System32\drivers\etc\hosts
+127.0.0.1 www.oauthtest.lk</pre>
+<p><strong>Add a Virtual Host entry in the Apache Server config for SSL</strong></p>
+<p>[caption id="attachment_453" align="aligncenter" width="611"]<img class=" size-full wp-image-453 aligncenter" src="{{ site.baseurl }}/assets/ssl_apache.png" alt="SSL_apache.PNG" width="611" height="286" /> httpd-ssl.conf for the Apache 2.18 server[/caption]</p>
+<p><strong>Laravel by default has CSRF Protection enabled using the Synchronizer Token pattern. It would throw exceptions if CSRF token validations failed. Therefore, since we are implementing our OWN CSRF protection functionality, make sure to disable the <em>VerifyCsrfToken</em> class from the HTTP middleware.</strong></p>
+<pre>C:\Wamp64\www\oauth\app\Http\Kernel.php</pre>
+<p>[caption id="attachment_454" align="aligncenter" width="528"]<img class=" size-full wp-image-454 aligncenter" src="{{ site.baseurl }}/assets/kernel-php.png" alt="Kernel.php" width="528" height="173" /> VerifyCsrfToken class is commented out[/caption]</p>
+<p>&nbsp;</p>
+<p><strong>For CSRF Protection functionality to work, a user must be first authenticated with the site.</strong> Therefore, a simple form of hard-coded credentials in the JSON format was used to implement a LocalLogin class that would authenticate a user.</p>
+<p>The users.json file is as follows. Note that the password field is md5 hashed.</p>
+<p>&nbsp;</p>
+<p>[caption id="attachment_457" align="aligncenter" width="433"]<img class=" size-full wp-image-457 aligncenter" src="{{ site.baseurl }}/assets/user_json.png" alt="user_json" width="433" height="290" /> users.json[/caption]</p>
+<p>The login controller, LocalLogin.php was implemented as follows.</p>
+<p>[caption id="attachment_458" align="aligncenter" width="650"]<img class=" size-full wp-image-458 aligncenter" src="{{ site.baseurl }}/assets/local_login.png" alt="local_login" width="650" height="520" /> LocalLogin::class[/caption]</p>
+<p>&nbsp;</p>
+<p>The user credentials are read from users.json and is checked against the request data from the login form.</p>
+<p>[caption id="attachment_459" align="aligncenter" width="432"]<img class=" size-full wp-image-459 aligncenter" src="{{ site.baseurl }}/assets/login.png" alt="login" width="432" height="441" /> Login page[/caption]</p>
+<p>Once the user credentials match, a session is created and a session cookie is set.</p>

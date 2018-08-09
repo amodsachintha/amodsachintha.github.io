@@ -1,0 +1,78 @@
+---
+layout: post
+title: Accessing Facebook's Graph API via our Access Token
+date: 2018-05-10 13:58:18.000000000 +05:30
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- SSO
+- SSS
+- Web Development
+tags:
+- Apache
+- Facebook Graph API
+- Laravel
+- OAuth
+- OAuth 2.0
+- PHP
+meta:
+  _publicize_done_external: a:2:{s:8:"facebook";a:1:{i:20187691;s:37:"https://facebook.com/1735093933252062";}s:7:"twitter";a:1:{i:20187692;s:60:"https://twitter.com/amod_sachintha/status/994509471740252160";}}
+  geo_longitude: '79.8977217'
+  geo_latitude: '6.8819690'
+  _thumbnail_id: '466'
+  _rest_api_published: '1'
+  _rest_api_client_id: "-1"
+  _publicize_job_id: '17690898764'
+  timeline_notification: '1525944505'
+  _oembed_51a297c07b398816075210c2bd297023: "{{unknown}}"
+  _publicize_done_20116437: '1'
+  _wpas_done_20187691: '1'
+  _publicize_done_20116438: '1'
+  _wpas_done_20187692: '1'
+  publicize_twitter_user: amod_sachintha
+  publicize_linkedin_url: https://www.linkedin.com/updates?discuss=&scope=423605167&stype=M&topic=6400275166714257408&type=U&a=pd38
+  _publicize_done_20116440: '1'
+  _wpas_done_20187696: '1'
+author:
+  login: amodsachintha
+  email: amod077@gmail.com
+  display_name: amodsachintha
+  first_name: ''
+  last_name: ''
+excerpt: we'll actually implement code to access Facebook data of a particular user.
+---
+<h2>Introduction</h2>
+<p>The previous post on OAuth discussed the authorization procedure in order to access protected resources form a resource server. Here, in this post, we'll actually implement code to access Facebook data of a particular user.</p>
+<p><em><a href="https://github.com/amodsachintha/oauth-csrf-sss">repo@github</a></em></p>
+<h2>How?</h2>
+<p><!--more--></p>
+<p>[caption id="attachment_460" align="aligncenter" width="844"]<img class=" size-full wp-image-460 aligncenter" src="{{ site.baseurl }}/assets/getuserdetails.png" alt="getUserDetails.PNG" width="844" height="550" /> Get user details[/caption]</p>
+<p>Facebook stores information in the form of Nodes, therefore every request to Facebook's Graph API would return a <strong>GraphNode </strong>object. This node would contain information about the particular request.</p>
+<p>To request for user data, we simply do a <strong>GET</strong> request to the API with the relevant fields in the URL. Note that each and every time a resource is requested, the <strong>Access token</strong> is also passed along. Proper exception handling should also be implemented with each request too.</p>
+<pre>$response = $fb-&gt;get('/me?fields=id,name,posts.limit(2)', $_SESSION['fb_access_token']);</pre>
+<p>The GraphNode details are extracted systematically and is then passed to the html renderer in Laravel as arrays or strings.</p>
+<p>The GraphNode contains information for accessing other resources as well.</p>
+<p>eg. User post contents: images, story, caption etc.</p>
+<p>[caption id="attachment_461" align="aligncenter" width="654"]<img class=" size-full wp-image-461 aligncenter" src="{{ site.baseurl }}/assets/getposts.png" alt="getPosts" width="654" height="562" /> Get User Profile image and Post Details[/caption]</p>
+<p>To post a status message on the authenticated user's wall, a POST request to the /me/feed endpoint with the relevant fields would do.</p>
+<p>[caption id="attachment_462" align="aligncenter" width="769"]<img class=" size-full wp-image-462 aligncenter" src="{{ site.baseurl }}/assets/poststatus.png" alt="postStatus" width="769" height="438" /> Post Status message on wall[/caption]</p>
+<p>For a user to logout, a logout URL is generated with the <em>RedirectLoginHelper</em> class and passed onto the html page.</p>
+<p>[caption id="attachment_463" align="alignnone" width="1031"]<img class="alignnone size-full wp-image-463" src="{{ site.baseurl }}/assets/logout.png" alt="logout" width="1031" height="250" /> Generating a logout URL[/caption]</p>
+<h3></h3>
+<h3>FRONT-END</h3>
+<p>The data retrieved from the Controller Class is sent to the front end views to render to the user. To display multiple posts, we loop through the posts array using a foreach loop.</p>
+<p>[caption id="attachment_464" align="aligncenter" width="769"]<img class=" size-full wp-image-464 aligncenter" src="{{ site.baseurl }}/assets/frontend.png" alt="frontend.PNG" width="769" height="815" /> Main View[/caption]</p>
+<p>&nbsp;</p>
+<p>The end result is as follow, and it looks good too.</p>
+<p>[caption id="attachment_465" align="aligncenter" width="861"]<img class=" size-full wp-image-465 aligncenter" src="{{ site.baseurl }}/assets/demo.png" alt="demo" width="861" height="919" /> Main View Rendered[/caption]</p>
+<p>A Status update to the feed, looks like this.</p>
+<p><img class=" size-full wp-image-466 aligncenter" src="{{ site.baseurl }}/assets/statusupdate.png" alt="StatusUpdate" width="525" height="214" /></p>
+<blockquote><p>relevant Controllers:</p>
+<pre>https://github.com/amodsachintha/oauth-csrf-sss/blob/master/app/Http/Controllers/FacebookController.php</pre>
+<p>relevant Views:</p>
+<pre>https://github.com/amodsachintha/oauth-csrf-sss/blob/master/resources/views/index.blade.php
+https://github.com/amodsachintha/oauth-csrf-sss/blob/master/resources/views/member.blade.php</pre>
+</blockquote>

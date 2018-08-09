@@ -1,0 +1,82 @@
+---
+layout: post
+title: Lesson 07 - If-else-else if මොකද කරන්නේ
+date: 2016-08-01 09:12:55.000000000 +05:30
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- C++
+tags: []
+meta:
+  _thumbnail_id: '182'
+  _rest_api_client_id: "-1"
+  _rest_api_published: '1'
+  _publicize_job_id: '25350556567'
+author:
+  login: amodsachintha
+  email: amod077@gmail.com
+  display_name: amodsachintha
+  first_name: ''
+  last_name: ''
+---
+<p>කන්ඩිෂන් එකක් පිලිපදිමින් interactive output දෙන්න ඉෆ් else else if භාවිතා කරන්න පුලුවන්.</p>
+<pre class="example"><span style="color:#008000;">&gt;     විශාලද?                12 &gt; 10 is TRUE
+&lt;     කුඩාද?                 2 &lt; 5 is TRUE
+&gt;=    විශාල හෝ සමානද?       4 &gt;= 4 is TRUE
+&lt;=    කුඩා හෝ සමානද?        3 &lt;= 4 is TRUE
+==    සමානද?                33 == 33 is TRUE
+!=    අසමානද?               11 != 4 is TRUE
+</span></pre>
+<p>මූලික syntax එක,</p>
+<pre class="example"><span style="color:#339966;">if</span> ( <span style="color:#993300;">TRUE</span> ){
+  මෙම statement එක execute කරන්න.
+}
+<span style="color:#339966;">else if</span>(<span style="color:#993300;">TRUE</span>){
+  මේවා execute කරන්න.
+}
+<span style="color:#339966;">else</span>{
+ මේවා execute කරන්න.
+}</pre>
+<p>[youtube https://www.youtube.com/watch?v=qKbGWYGfz14]</p>
+<p>උදා:<!--more--></p>
+<p><span style="color:#ff6600;">#include &lt;iostream&gt;</span><br />
+<span style="color:#008000;">using namespace</span> std;</p>
+<p><strong>int</strong> main(){<br />
+int mark;<br />
+cout &lt;&lt; "What mark did you get in the test?" &lt;&lt; endl;<br />
+cin &gt;&gt; mark;</p>
+<p><strong><span style="color:#008000;">if</span></strong>(mark&gt;100){<br />
+cout &lt;&lt; "Invalid mark" &lt;&lt; endl;<br />
+<span style="color:#008000;">return</span> -1;<br />
+}</p>
+<p><strong><span style="color:#008000;">if</span></strong>(mark &gt;= 90)<br />
+{<br />
+cout &lt;&lt; <span style="color:#ff6600;">"You got an A*"</span> &lt;&lt; endl;<br />
+cout &lt;&lt; <span style="color:#ff6600;">"You Passed!"</span> &lt;&lt; endl;<br />
+}<br />
+<strong><span style="color:#008000;">else if</span></strong>(mark &gt;= 75)<br />
+{<br />
+cout &lt;&lt; <span style="color:#ff6600;">"You got an B"</span> &lt;&lt; endl;<br />
+cout &lt;&lt; <span style="color:#ff6600;">"You Passed!"</span> &lt;&lt; endl;<br />
+}<br />
+<span style="color:#008000;"><strong>else if</strong></span>(mark &gt;= 60 )<br />
+{<br />
+cout &lt;&lt; <span style="color:#ff6600;">"You got an C"</span> &lt;&lt; endl;<br />
+cout &lt;&lt; <span style="color:#ff6600;">"You Passed!"</span> &lt;&lt; endl;<br />
+}<br />
+<span style="color:#008000;"><strong>else if</strong></span>(mark &gt;= 50)<br />
+{<br />
+cout &lt;&lt; <span style="color:#ff6600;">"You got an D"</span> &lt;&lt; endl;<br />
+cout &lt;&lt; <span style="color:#ff6600;">"You Passed!"</span> &lt;&lt; endl;<br />
+}<br />
+<span style="color:#008000;"><strong>else</strong></span><br />
+{<br />
+cout &lt;&lt; <span style="color:#ff6600;">"You got an E"</span> &lt;&lt; endl;<br />
+cout &lt;&lt; <span style="color:#ff6600;">"You Failed!" </span>&lt;&lt; endl;<br />
+}</p>
+<p><span style="color:#008000;">return</span> 0;<br />
+}</p>
+<p>&nbsp;</p>

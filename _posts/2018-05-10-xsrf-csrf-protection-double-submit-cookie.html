@@ -1,0 +1,57 @@
+---
+layout: post
+title: XSRF (CSRF) Protection - Double Submit Cookie
+date: 2018-05-10 13:58:30.000000000 +05:30
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- CSRF
+- SSS
+- Web Development
+tags:
+- Cookies
+- Double Submit Cookie
+- hacking
+- PHP
+- XSRF
+meta:
+  _thumbnail_id: '442'
+  _rest_api_published: '1'
+  _rest_api_client_id: "-1"
+  _publicize_job_id: '17689305538'
+  timeline_notification: '1525940911'
+author:
+  login: amodsachintha
+  email: amod077@gmail.com
+  display_name: amodsachintha
+  first_name: ''
+  last_name: ''
+---
+<h2>Introduction</h2>
+<p>If storing the CSRF token in session (Synchronizer Token) is problematic when the user base is pretty large, an alternative defense is use of a double submit cookie. A double submit cookie is defined as sending a pseudo-random value in both a cookie (header) and as a request parameter, where the server verifies if the cookie value and request value match.</p>
+<h2>How?</h2>
+<p><!--more--></p>
+<p>When a user authenticates to a site, the site generates a pseudo-random value and set it as a cookie on the user's machine.</p>
+<p>[caption id="attachment_446" align="aligncenter" width="716"]<img class=" size-full wp-image-446 aligncenter" src="{{ site.baseurl }}/assets/gen_csrf2_php.png" alt="gen_csrf2_php" width="716" height="84" /> Generate a pseudo-random string using the mod_ssl for php_apache[/caption]</p>
+<p>[caption id="attachment_442" align="aligncenter" width="612"]<img class=" size-full wp-image-442 aligncenter" src="{{ site.baseurl }}/assets/gen_csrf2.png" alt="gen_CSRF2" width="612" height="146" /> Setting "csrfTokenCookie" in the user's browser[/caption]</p>
+<p>The site then requires that every transaction request include this random value as a hidden form value.</p>
+<p>[caption id="attachment_443" align="aligncenter" width="808"]<img class=" size-full wp-image-443 aligncenter" src="{{ site.baseurl }}/assets/js_csrf2.png" alt="js_csrf2" width="808" height="264" /> Appending a hidden input field in the form body via JavaScript at submit time[/caption]</p>
+<p>The server will then verify the header cookie value with the request csrf_token value upon submission.</p>
+<p>[caption id="attachment_444" align="aligncenter" width="1118"]<img class=" size-full wp-image-444 aligncenter" src="{{ site.baseurl }}/assets/check_csrf2.png" alt="check_csrf2" width="1118" height="354" /> Extracting Header and Body details from the POST request and getting both CSRF token values for comparison[/caption]</p>
+<p>A cross origin attacker cannot read any data sent from the server or modify cookie values, because of the same-origin policy. This means that while an attacker can force a victim to send any value he wants with a malicious CSRF request, the attacker will be unable to modify or read the value stored in the cookie.</p>
+<p>[caption id="attachment_447" align="aligncenter" width="441"]<img class=" size-full wp-image-447 aligncenter" src="{{ site.baseurl }}/assets/cookie_csrf2.png" alt="cookie_csrf2.PNG" width="441" height="476" /> CSRF token (Over Secure connections)[/caption]</p>
+<p>&nbsp;</p>
+<h3>Demo</h3>
+<p>[caption id="attachment_448" align="aligncenter" width="346"]<img class=" size-full wp-image-448 aligncenter" src="{{ site.baseurl }}/assets/csrf2_form.png" alt="csrf2_form" width="346" height="228" /> Form[/caption]</p>
+<p>&nbsp;</p>
+<p>[caption id="attachment_449" align="aligncenter" width="461"]<img class="alignnone size-full wp-image-449" src="{{ site.baseurl }}/assets/dem01_csrf2.png" alt="dem01_csrf2" width="461" height="286" /> Successful token validation[/caption]</p>
+<p>To demonstrate a Token Falsification, we can statically edit the request CSRF_token value to a invalid token string.</p>
+<p>[caption id="attachment_450" align="aligncenter" width="761"]<img class=" size-full wp-image-450 aligncenter" src="{{ site.baseurl }}/assets/false_csrf2_token.png" alt="false_csrf2_token" width="761" height="140" /> Set request token value to an invalid string[/caption]</p>
+<p>The validation fails with the invalid request_token_string.</p>
+<p>[caption id="attachment_451" align="aligncenter" width="465"]<img class=" size-full wp-image-451 aligncenter" src="{{ site.baseurl }}/assets/csrf2_fail.png" alt="csrf2_fail" width="465" height="275" /> Validation fails[/caption]</p>
+<p>&nbsp;</p>
+<h2>Conclusion</h2>
+<p>Since the cookie value and the request parameter or form value must be the same, the attacker will be unable to successfully force the submission of a request with the random CSRF value.</p>

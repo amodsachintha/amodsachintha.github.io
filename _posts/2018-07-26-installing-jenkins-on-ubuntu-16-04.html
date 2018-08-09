@@ -1,0 +1,116 @@
+---
+layout: post
+title: Installing Jenkins on Ubuntu 16.04
+date: 2018-07-26 03:04:51.000000000 +05:30
+type: post
+published: true
+status: publish
+categories:
+- CI
+- Other
+tags:
+- AWS
+- Installation
+- Jenkins
+- Linux
+- Ubuntu
+meta:
+  _wpas_skip_20187691: '1'
+  _publicize_done_external: a:1:{s:7:"twitter";a:1:{i:20187692;s:61:"https://twitter.com/amod_sachintha/status/1022233749948432396";}}
+  _rest_api_published: '1'
+  _rest_api_client_id: "-1"
+  _publicize_job_id: '20392807389'
+  timeline_notification: '1532554491'
+  _publicize_done_20116438: '1'
+  _wpas_done_20187692: '1'
+  publicize_twitter_user: amod_sachintha
+  publicize_linkedin_url: www.linkedin.com/updates?topic=6427999445094326272
+  _publicize_done_20116440: '1'
+  _wpas_done_20187696: '1'
+  _thumbnail_id: '549'
+author: amodsachintha
+excerpt: A brief guide on installing Jenkins CI on Ubuntu 16.04 Server
+---
+<h2>What is Jenkins?</h2>
+<p class="s570a4-10 iEJDri"><a href="https://en.wikipedia.org/wiki/Jenkins_(software)" target="_blank" rel="noopener">Jenkins</a> is just a thing that does things. On a schedule. Or on code change detection. Or on 'triggers'.  In a nutshell, Jenkins helps you automate your workflow. Say you develop a software. You might have unit tests bundled in your software. A Jenkins job could watch your software's git repository and run these tests for you, like you would do manually, whenever a new commit is pushed.</p>
+<p class="s570a4-10 iEJDri">If the tests are successful, you might want Jenkins to package/bundle/compile your software to produce an artifact you can install or deploy. When you have that artifact ready, you might even want Jenkins to deploy it for you in production.</p>
+<p><!--more--></p>
+<p class="s570a4-10 iEJDri">It has the tools and plugins to help you do that but really you can do what you want using, for example, the shell provisioner to run bash/python/ruby/whatever scripts and commands. There is a lot of extra plugins for Jenkins so it can be used with different technology stacks. Literally, Jenkins could be used for automation of any processes.</p>
+<p class="s570a4-10 iEJDri">eg: you want to download some torrents, easy, schedule a job on Jenkins to run past midnight ;)</p>
+<h2>Procedure</h2>
+<h3>Prerequsites</h3>
+<p>Jenkins is an open source automation server written in Java. It is a server-based system that runs in servlet containers such as Apache Tomcat. Therefore Jenkins requires Java to be installed in the system. If your system lacks a Java installation, the following setup would be useful in installing it.</p>
+<h5>Add the PPA</h5>
+<pre>sudo add-apt-repository ppa:webupd8team/java</pre>
+<h5><img class="alignnone size-full wp-image-527" style="font-size:16px;font-weight:400;" src="{{ site.baseurl }}/assets/1.png" alt="1" width="781" height="418" /></h5>
+<h5>Update and install the installer script</h5>
+<p>Issue the following commands to update system package index and install Java installer script:</p>
+<pre>sudo apt update; sudo apt install oracle-java8-installer</pre>
+<h5><img class="alignnone size-full wp-image-528" src="{{ site.baseurl }}/assets/3.png" alt="3" width="781" height="418" /></h5>
+<h5>Check the Java version</h5>
+<pre>javac -version</pre>
+<p><img class="alignnone size-full wp-image-529" src="{{ site.baseurl }}/assets/4-e1532550396992.png" alt="4" width="470" height="122" /></p>
+<h5>Set Java environment variables</h5>
+<pre>sudo apt install oracle-java8-set-default</pre>
+<p><img class="alignnone size-full wp-image-530" src="{{ site.baseurl }}/assets/5-e1532550495877.png" alt="5" width="649" height="221" /></p>
+<p><img class="alignnone size-full wp-image-532" src="{{ site.baseurl }}/assets/8.png" alt="8.PNG" width="661" height="418" /></p>
+<h3>Installing Jenkins</h3>
+<p>The version of Jenkins included in the default ubuntu repos are often behind the latest available builds of the project. Therefore, to take advantage of the latest fixes and features, the Jenkins project maintained repo is added to the system.</p>
+<p>First, add the repo key.</p>
+<pre>wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -</pre>
+<p><img class="alignnone size-full wp-image-545" src="{{ site.baseurl }}/assets/51-e1532554080985.png" alt="5" width="781" height="125" /></p>
+<p>Next, append the Debain repository address to the server's sources.list file.</p>
+<pre>echo deb https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list</pre>
+<p><img class="alignnone size-full wp-image-546" src="{{ site.baseurl }}/assets/6-e1532554097940.png" alt="6" width="781" height="107" /></p>
+<p>Now it's run an update to get the latest repo.</p>
+<pre>sudo apt-get update</pre>
+<p><img class="alignnone size-full wp-image-533" src="{{ site.baseurl }}/assets/71-e1532552775285.png" alt="7" width="654" height="254" /></p>
+<p>Install Jenkins Server by calling the command shown below.</p>
+<pre>sudo apt-get install jenkins</pre>
+<p><img class="alignnone size-full wp-image-534" src="{{ site.baseurl }}/assets/81-e1532552814503.png" alt="8" width="639" height="258" /></p>
+<h3>Starting Jenkins</h3>
+<p>Using <code>systemctl</code> we'll start Jenkins:</p>
+<pre class="code-pre "><code>sudo systemctl start jenkins</code></pre>
+<p>To view the service's state information, use the status command with systemctl.</p>
+<pre>sudo systemctl status jenkins</pre>
+<p><img class="alignnone size-full wp-image-536" src="{{ site.baseurl }}/assets/10.png" alt="10.PNG" width="661" height="418" /></p>
+<h3>Allowing incoming traffic via Firewall</h3>
+<p>Jenkins, by default runs on port 8080, so to open that port using ufw:</p>
+<pre>sudo ufw allow 8080</pre>
+<p>Check to see if the new rules are applied.</p>
+<pre>sudo ufw status
+
+</pre>
+<pre>Status: active
+
+To                         Action      From
+--                         ------      ----
+OpenSSH                    ALLOW       Anywhere
+8080                       ALLOW       Anywhere
+OpenSSH (v6)               ALLOW       Anywhere (v6)
+8080 (v6)                  ALLOW       Anywhere (v6)</pre>
+<p>Note that you'll need to allow incoming traffic on port 8080 using the management console if the server is installed at AWS or another cloud service provider. Since I'm using AWS, my inbound rules are as follows.</p>
+<p><img class="alignnone size-full wp-image-537" src="{{ site.baseurl }}/assets/12.png" alt="12.PNG" width="1125" height="424" /></p>
+<h3>Initial Configuration</h3>
+<p>Visit the server address on port 8080: : <code>http://<span class="highlight" style="color:#ff6600;">ip_address_or_domain_name</span>:8080</code></p>
+<p>It should prompt a "Unlock Jenkins" screen.</p>
+<p><img class="alignnone size-full wp-image-538" src="{{ site.baseurl }}/assets/13.png" alt="13.PNG" width="918" height="694" /></p>
+<p>Use the cat command to display the password for the Jenkins instance.</p>
+<pre>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</pre>
+<p><img class="alignnone size-full wp-image-544" src="{{ site.baseurl }}/assets/14.png" alt="14.PNG" width="722" height="194" /></p>
+<p>Copy the 32 character password and paste it into the Administrator Password field. The next screen presents the option of installing suggested plugins or specific plugins.</p>
+<p><img class="alignnone size-full wp-image-539" src="{{ site.baseurl }}/assets/15.png" alt="15.PNG" width="919" height="691" /></p>
+<p>Selecting the "Install suggested plugins" option will immediately start the installation.</p>
+<p><img class="alignnone size-full wp-image-540" src="{{ site.baseurl }}/assets/16.png" alt="16.png" width="1137" height="590" /></p>
+<p>When the plugins are installed, you'll be prompted to create a new Admin user for the Jenkins instance. It is possible to skip this step, but for the sake of simplicity, take a moment to create a user.</p>
+<p><img class="alignnone size-full wp-image-541" src="{{ site.baseurl }}/assets/17.png" alt="17.PNG" width="897" height="671" /></p>
+<p>Once that's complete, you'll be greeted with "Jenkins is ready" screen.</p>
+<p><img class="alignnone size-full wp-image-542" src="{{ site.baseurl }}/assets/18.png" alt="18.PNG" width="864" height="663" /></p>
+<p>Click on "Start using Jenkins" to visit the Dashboard of the newly installed Jenkins instance.</p>
+<p><img class="alignnone size-full wp-image-543" src="{{ site.baseurl }}/assets/19.png" alt="19.PNG" width="1307" height="895" /></p>
+<p>&nbsp;</p>
+<h2>Conclusion</h2>
+<p>In this step by step guide, we've installed Jenkins on Ubuntu 16.04 using the project-provided packages, started the server, allowed access through the firewall. After this point, start exploring Jenkins to learn the immense automation capabilities it posses.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
