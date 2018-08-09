@@ -24,14 +24,12 @@ facebook_username: amodsachintha
 
 # Build settings
 
-remote_theme: chesterhow/tale
-
+theme: tale
 permalink:    /:year-:month-:day/:title
 paginate:     5
 #theme: minima
 plugins:
   - jekyll-paginate
-  - jekyll-remote-theme
   - jekyll-feed
 # Build settings
 markdown: kramdown
