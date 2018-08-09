@@ -3,10 +3,6 @@ layout: post
 title: The Internship
 date: 2018-06-23 18:18:17.000000000 +05:30
 type: post
-parent_id: '0'
-published: true
-password: ''
-status: publish
 categories:
 - Other
 tags:
@@ -33,6 +29,9 @@ meta:
   _wpas_done_20187696: '1'
 author: amodsachintha
 excerpt: Some details about my time at KBSL Technologies as an Intern.
+images:
+  - image: /images/a.jpeg
+  - image: /images/b.jpeg
 ---
 <p>This blog post has been the hardest to write for me by far. In part, the challenge stems from trying to sum up 6 months worth of experiences into a few paragraphs. Even more challenging, this post marks the end of my internship here with <a href="http://www.kbslit.com" target="_blank" rel="noopener">KBSL Technologies</a>. Well here goes…</p>
 <p><img class=" size-full wp-image-494 alignnone" src="{{ site.baseurl }}/assets/img_20180423_151633-e1529754088855.jpg" alt="kbsl" /></p>
@@ -42,8 +41,26 @@ excerpt: Some details about my time at KBSL Technologies as an Intern.
 <p>During my time at KBSL, I got the chance to be involved in a massive upgrade in IT infrastructure of a major client in the banking sector. Therefore, I was able to gain experience in large scale island wide redundancy provisioned network implementations which included multiple technologies such as VPNs, IP Telephony, BGP routing, Wireless networking etc.</p>
 <p>This project had the entire team working late hours (we loved working late 😍 ) all over the country visiting branches of the respective banks upgrading their existing infrastructure. It was more of a road-trip kind of deal because we got to spend our time quite nicely visiting a lot of places in Sri Lanka.</p>
 
-<p>[gallery ids="508,503,505,495,506,497,501,496,512,507,504,498,509,499,500,513,519,511,502,510,516,515" type="rectangular" link="file"]</p>
 
+<div id="gallery">
+  <table>
+  <script>
+    var count=0;
+    var images=['a.jpeg','b.jpeg','a.jpeg','b.jpeg','b.jpeg','a.jpeg','b.jpeg','b.jpeg','a.jpeg','b.jpeg','b.jpeg','a.jpeg'];
+
+    for(var i=0; i<images.length;){
+      if(i%6==0 && i!=0){
+        document.write('<tr>')
+      }
+      document.write('<td><img src="/images/'+images[i]+'" width="200px"></td>');
+      i++;
+      if(i%6==0 && i!=0){
+        document.write('</tr>')
+      }
+    }
+  </script>
+  </table>
+</div>
 <p>&nbsp;</p>
 <a href="https://youtu.be/J6Ybrry75no">Video 1 : Watch on YouTube</a> | 
 <a href="https://youtu.be/OFj7p5z9jPQ">Video 2 : Watch on YouTube</a>
