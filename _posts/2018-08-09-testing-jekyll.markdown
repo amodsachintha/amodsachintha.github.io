@@ -21,7 +21,7 @@ The import plugin has to be installed before running the following script.
 ```
 $ gem install jekyll-import
 ```
-Then used the following  [script](/files/testing-jekyll/import.rb) to automate the task of exporting from the wordpress site.
+Then used the following  [script](/files/testing-jekyll/import.rb) to automate the task of exporting from the wordpress site using the `.xml`.
 ```ruby
 require "jekyll-import";
     JekyllImport::Importers::WordpressDotCom.run({
