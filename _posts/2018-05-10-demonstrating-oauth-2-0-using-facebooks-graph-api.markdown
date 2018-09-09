@@ -46,7 +46,7 @@ excerpt: OAuth 2.0 is regarded as the industry-standard protocol for authorizati
 <p>The <em>Resource Server</em> and <em>Authorization Server</em> roles can be (and usually is) combined to form an <strong>API</strong> that fulfills both service roles.</p>
 <p><!--more--></p>
 <h2>Protocol Flow</h2>
-<p>[caption id="attachment_407" align="aligncenter" width="554"]<img class="alignnone size-full wp-image-407" src="{{ site.baseurl }}/assets/oauth_flow.jpg" alt="OAuth 2.0 Flow" width="554" height="370" /> High level overview of OAuth protocol flow[/caption]</p>
+<p><img class="alignnone size-full wp-image-407" src="{{ site.baseurl }}/assets/oauth_flow.jpg" alt="OAuth 2.0 Flow" width="554" height="370" /> High level overview of OAuth protocol flow</p>
 <ol>
 <li>The application requests authorization to access protected resources from the User.</li>
 <li>When the user authorizes the request, the application receives an authorization grant. (The grant types will be discussed briefly later on)</li>
@@ -56,12 +56,12 @@ excerpt: OAuth 2.0 is regarded as the industry-standard protocol for authorizati
 <li>If the token is valid, the resource endpoint serves the resource to the application.</li>
 </ol>
 <h2>Application Registration</h2>
-<p>[caption id="attachment_409" align="aligncenter" width="507"]<img class="alignnone  wp-image-409" src="{{ site.baseurl }}/assets/app_registration_fb.png" alt="app_registration_fb" width="507" height="439" /> Application Registration fallout on Facebook Developers[/caption]</p>
+<p><img class="alignnone  wp-image-409" src="{{ site.baseurl }}/assets/app_registration_fb.png" alt="app_registration_fb" width="507" height="439" /> Application Registration fallout on Facebook Developers</p>
 <p>Before using OAuth with an application, the application must be first registered with the service.</p>
 <h4 id="client-id-and-client-secret">Client ID and Client Secret</h4>
 <p>Once the application is registered, the service will issue "client credentials". It consists of a <em>client identifier </em>and a <em>client secret</em>. (A username-and-password-like combination) The Client ID is a publicly exposed string that is used by the service API to identify the application. The Client Secret is used to authenticate the identity of the application to the service API when the application requests to access a user's account. It must be kept private between the application and the API. Implementing client side code with the Client Secret in plain is a huge security risk.</p>
 <h4>Callback URLs</h4>
-<p>[caption id="attachment_410" align="alignnone" width="713"]<img class="alignnone size-full wp-image-410" src="{{ site.baseurl }}/assets/fb_callbacks.png" alt="fb_callbacks" width="713" height="323" /> Callback URLs for the application[/caption]</p>
+<p><img class="alignnone size-full wp-image-410" src="{{ site.baseurl }}/assets/fb_callbacks.png" alt="fb_callbacks" width="713" height="323" /> Callback URLs for the application</p>
 <p>Redirect URLs must be pre-configured into the service before exposing them via the client code. These will determine where a user is redirected upon the authorization result.</p>
 <h2 id="authorization-grant">Authorization Grant</h2>
 <p>OAuth 2.0 defines four grant types, each of which is useful in different cases:</p>
@@ -74,7 +74,7 @@ excerpt: OAuth 2.0 is regarded as the industry-standard protocol for authorizati
 <h2>Authorization Code Grant Type</h2>
 <p>The <em>authorization code</em> grant type is the most commonly used because it is optimized for <em>server-side applications.</em> Because the server-side source code is not publicly exposed, <em>Client Secret</em> confidentiality can be maintained.</p>
 <h4>Authorization Code Link</h4>
-<p>[caption id="attachment_412" align="aligncenter" width="380"]<img class="  wp-image-412 aligncenter" src="{{ site.baseurl }}/assets/fb_login.png" alt="fb_login" width="380" height="256" /> Locally hosted web app[/caption]</p>
+<p><img class="  wp-image-412 aligncenter" src="{{ site.baseurl }}/assets/fb_login.png" alt="fb_login" width="380" height="256" /></p>
 <p>The user is prompted to click on a button or link that resembles the following format.</p>
 <pre>https://www.facebook.com/v2.12/dialog/oauth?client_id=161640204541883&amp;state=2081c5c62987cf1a760e3833295f3ea2&amp;response_type=code&amp;sdk=php-sdk-5.6.2&amp;redirect_uri=https%3A%2F%2Fwww.oauthtest.lk%2Ffbcallback&amp;scope=email%2Cpublic_profile%2Cuser_posts%2Cuser_friends%2Cpublish_actions</pre>
 <p>The link components are as follows.</p>
@@ -87,21 +87,21 @@ excerpt: OAuth 2.0 is regarded as the industry-standard protocol for authorizati
 <li><strong>scope: </strong>specifies the level of access and/or permissions to resource groups.</li>
 <li><strong>sdk: </strong> php sdk version. This is optional</li>
 </ul>
-<p>[code language='php']<br />
-    public function show()<br />
-    {<br />
-        $fb = new Facebook([<br />
-            'app_id' =&gt; env('FB_APP_ID'),<br />
-            'app_secret' =&gt; env('FB_APP_SECRET'),<br />
-            'default_graph_version' =&gt; env('API_VERSION'),<br />
-        ]);</p>
-<p>        $helper = $fb-&gt;getRedirectLoginHelper();<br />
-        $permissions = ['email', 'public_profile', 'user_posts', 'user_friends', 'publish_actions',];<br />
-        $loginUrl = $helper-&gt;getLoginUrl('https://www.oauthtest.lk/fbcallback', $permissions);<br />
-        $url = htmlspecialchars($loginUrl);<br />
-        return view('index')-&gt;with('url', $url);</p>
-<p>    }<br />
-[/code]</p>
+```php
+    public function show()
+    {
+        $fb = new Facebook(
+            'app_id' => env('FB_APP_ID'),
+            'app_secret' => env('FB_APP_SECRET'),
+            'default_graph_version' => env('API_VERSION'),
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
+        $permissions = ['email', 'public_profile', 'user_posts', 'user_friends', 'publish_actions',];
+        $loginUrl = $helper->getLoginUrl('https://www.oauthtest.lk/fbcallback', $permissions);
+        $url = htmlspecialchars($loginUrl);
+        return view('index')->with('url', $url);
+    }
+```
 <h4>User Authorizes the application</h4>
 <p>When the user clicks the link, the user-agent (browser) is redirected to the identity service (i.e. Facebook) to authenticate the user's identity. The user must login to the service if they're not logged in already.</p>
 <p><img class=" size-full wp-image-414 aligncenter" src="{{ site.baseurl }}/assets/authentication.png" alt="authentication" width="610" height="662" /></p>
@@ -115,13 +115,15 @@ excerpt: OAuth 2.0 is regarded as the industry-standard protocol for authorizati
 <h4 id="step-5-application-receives-access-token">Application Receives Access Token</h4>
 <p>If the authorization is valid, the API will send a response containing the access token  to the application.</p>
 <p><img class="alignnone size-full wp-image-416" src="{{ site.baseurl }}/assets/access_token.png" alt="access_token" width="724" height="128" /></p>
-<p>[code language='php']<br />
-$helper = $fb-&gt;getRedirectLoginHelper();<br />
-        $_SESSION['FBRLH_state'] = $_GET['state'];<br />
-        try {<br />
-            $accessToken = $helper-&gt;getAccessToken(); //the SDK does a post to the token endpoint<br />
-        } catch (FacebookSDKException $e) {<br />
-            echo 'Facebook SDK returned an error: ' . $e-&gt;getMessage();<br />
-            exit;<br />
-        }<br />
-[/code]</p>
+
+```php
+     $helper = $fb->getRedirectLoginHelper();
+     $_SESSION['FBRLH_state'] = $_GET['state'];
+     try {
+        $accessToken = $helper->getAccessToken(); //the SDK does a post to the token endpoint
+        } catch (FacebookSDKException $e) {
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+        }
+```
+    
