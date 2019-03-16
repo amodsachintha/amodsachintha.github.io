@@ -21,7 +21,7 @@ Head on to [Travis CI](https://travis-ci.org ) and signup using your GitHib acco
 
 Once you’re successfully signed in, Travis CI will then import your repository details. This might take a while depending on your repository count. After the import is complete, you will have a list of repositories as shown below.
 
-![Repo list](/assets/travis-ci/repos.PNG "Repositories")
+![Repo list](/assets/travis-ci/repos.png "Repositories")
 
 For this demostration, I’m using my [weather-app](https://github.com/amodsachintha/react-weather-app ) created with React. Click on **“Activate Repository”** to enable/add a [Webhook](https://developer.github.com/webhooks/) to the repository. This Webhook will trigger configured services for certain events.
 
