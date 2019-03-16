@@ -15,7 +15,7 @@ This post will be a simple introduction into configuring continous integration i
 
 ## Steps, Follow ‘em 👌 
 
-Head on to [Travis CI](https://travis-ci.org ) and signup using your GitHib account. Travis CI will then prompt for authorization on your repositories.
+Head on to [Travis CI](https://travis-ci.org ) and signup using your GitHub account. Travis CI will then prompt for authorization on your repositories.
 
 ![Signup](/assets/travis-ci/signup.PNG "Signup on Travis CI")
 
@@ -27,11 +27,11 @@ For this demostration, I’m using my [weather-app](https://github.com/amodsachi
 
 ![Weather-App](/assets/travis-ci/weather-app.PNG "React Weather App")
 
-So, like I said before, Travis CI will not know what to do as soon as you Activate the repository. We will now configure the ``travis.yml`` file in the GitHub repository for Travis CI to get the required build and deploy configuration.
+So, like I said before, Travis CI will not know what to do as soon as you activate the repository. We will now configure the ``.travis.yml`` file in the GitHub repository for Travis CI to get the required build and deploy configuration.
 
 ![travis.yml](/assets/travis-ci/travis.yml.PNG "Travis CI config")
 
-Note that I’m using [Surge.sh](https://surge.sh) to deploy my static build to Surge under [amodsachintha-react-weather.surge.sh](http://amodsachintha-react-weather.surge.sh ). Therefore, we need to go back to Travis and set up a couple things. Surge will need your email address and a token to log in as you from the TravisCI build tool. To get this token, run `surge token` in your command line and copy the output from the second line, I masked mine, but it should look something like this: 
+Note that I’m using [Surge.sh](https://surge.sh) to deploy my static build to Surge under [amodsachintha-react-weather.surge.sh](http://amodsachintha-react-weather.surge.sh ). Therefore, we need to go back to Travis and set up a couple things. Surge will need the email address and a token to log in from the TravisCI build tool. To get this token, run `surge token` in the CLI and copy the output from the second line, I masked mine, but it should look something like this: 
 
 ![Surge Token](/assets/travis-ci/surge-token.PNG "Surge token")
 
@@ -43,7 +43,7 @@ Okay now, we’re almost done. The final step is to commit and push the changes 
 
 ![git commit and push](/assets/travis-ci/github-desktop.PNG "git commit and push")
 
-Head on to Travis CI to watch the build log scrolling...
+Head on to Travis CI to watch the build log scroll...
 
 ![Build start](/assets/travis-ci/travis-ci-build-start.PNG "Build start")
 
@@ -51,7 +51,7 @@ After the build is complete, inspect the log to see if the build and deploy was 
 
 ![Build complete](/assets/travis-ci/travis-ci-build-complete.PNG "Build complete")
 
-Additionally, we can add a fancy build badge to our README.md on GitHub for users to see if the builds are successful 😎 .  Click on the build bage near the repository name on Travis CI and select the Markdown version of the build status image. We can then add this code to the README file. Nice stuff!
+Additionally, we can add a fancy build badge to our README.md on GitHub for users to see if the builds are successful 😎 .  Click on the build bage near the repository name on Travis CI and select the Markdown version of the build status image. We can then add this code to the README file. Cool!
 
 ![Get Build Badge](/assets/travis-ci/build-badge.PNG "Get Build Badge")
 
