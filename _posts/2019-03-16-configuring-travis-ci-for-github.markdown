@@ -31,6 +31,18 @@ So, like I said before, Travis CI will not know what to do as soon as you activa
 
 ![travis.yml](/assets/travis-ci/travis.yml.PNG "Travis CI config")
 
+The `.yml` file contains basic configuration details for Travis. Let’s take a closer look at the config now.
+
+**language** - the base language used in the project
+
+**cache**   - instructs Travis to cache the given directories
+
+**script** - test/build commands (instructions)
+
+**deploy** - provides deployment information for Travis to automatically deploy the app. The `provider` is the service providing deployment and the `domain` is where the build will be available to the public (in case of Surge.sh). `project` is where the final build output lives. It will then be deployed to Surge.
+
+**on** - the working branch.
+
 Note that I’m using [Surge.sh](https://surge.sh) to deploy my static build to Surge under [amodsachintha-react-weather.surge.sh](http://amodsachintha-react-weather.surge.sh ). Therefore, we need to go back to Travis and set up a couple things. Surge will need the email address and a token to log in from the TravisCI build tool. To get this token, run `surge token` in the CLI and copy the output from the second line, I masked mine, but it should look something like this: 
 
 ![Surge Token](/assets/travis-ci/surge-token.PNG "Surge token")
