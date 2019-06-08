@@ -173,3 +173,5 @@ If everything went well, you should see the following output:
 ![voila!](\assets\iloveasm\5.png)
 
 Hope this helps!! See ya!
+
+[Medium Article](https://medium.com/@amod077/i-love-assembly-868ea263137f?source=friends_link&sk=b9fe34ebe75df7ca573d3c2adb53e09e)
