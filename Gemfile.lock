@@ -45,6 +45,8 @@ GEM
       jekyll (~> 3.3)
       sinatra (~> 1.4)
       sinatra-contrib (~> 1.4)
+    jekyll-compose (0.11.0)
+      jekyll (>= 3.7, < 5.0)
     jekyll-feed (0.10.0)
       jekyll (~> 3.3)
     jekyll-gist (1.5.0)
@@ -111,6 +113,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.12)
   jekyll-admin
+  jekyll-compose
   jekyll-gist
   jekyll-sitemap
   rake (~> 10.0)
