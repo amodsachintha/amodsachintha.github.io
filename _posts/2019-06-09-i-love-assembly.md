@@ -18,7 +18,7 @@ In most languages used today this’ll be a one or two line snippet. But in Asse
 
 Open up your favorite text editor and type out the following.
 
-```
+```nasm
 BITS 64
 section .data
     message DB "I ❤ Assembly", 10
